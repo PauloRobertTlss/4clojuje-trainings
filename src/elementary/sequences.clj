@@ -129,16 +129,52 @@
 
 (defn resolved31
   [args]
-  (reduce (fn
-            [accum currency]
-            (if (nil? (get accum currency nil))
-              (conj accum  {currency currency} )
-              (update-in accum currency currency))) [] args))
+  (reduce (fn [r element]
+            (if (= (first (last r)) element)
+              (conj (pop r) (conj (last r) element))        ;remove old, refresh new with conj
+              (conj r (vector element)))) (vector) args))
 
 (defn problem31
   []
   (and
-    (println (resolved31 [1 1 2 1 1 1 3 3]) '((1 1) (2) (1 1 1) (3 3)))
-    (println (resolved31 [:a :a :b :b :c]) '((:a :a) (:b :b) (:c)))
-    (println (resolved31 [[1 2] [1 2] [3 4]]) '(([1 2] [1 2]) ([3 4])))
+    (= (resolved31 [1 1 2 1 1 1 3 3]) '((1 1) (2) (1 1 1) (3 3)))
+    (= (resolved31 [:a :a :b :b :c]) '((:a :a) (:b :b) (:c)))
+    (= (resolved31 [[1 2] [1 2] [3 4]]) '(([1 2] [1 2]) ([3 4])))
+    ))
+
+;Problem 32, Duplicate a Sequence
+(defn resolved32
+  [args]
+  (reduce (fn
+            [r element]
+            (concat r [element element]))
+          (vector) args))
+
+(defn resolved32WithMapCat
+  [args]
+  (mapcat #(vector % %) args))
+
+(defn problem32
+  []
+  (and
+    (= (resolved32 [1 2 3]) '(1 1 2 2 3 3))
+    (= (resolved32 [:a :a :b :b]) '(:a :a :a :a :b :b :b :b))
+    (= (resolved32WithMapCat [[1 2] [3 4]]) '([1 2] [1 2] [3 4] [3 4]))
+    (= (resolved32WithMapCat [44 33]) [44 44 33 33])
+    ))
+
+
+;Problem 33, Replicate a Sequence
+(defn resolved33
+  [args repeatN]
+  (mapcat #(repeat repeatN %) args))
+
+(defn problem33
+  []
+  (and
+    (= (resolved33 [1 2 3] 2) '(1 1 2 2 3 3))
+    (= (resolved33 [:a :b] 4) '(:a :a :a :a :b :b :b :b))
+    (= (resolved33 [4 5 6] 1) '(4 5 6))
+    (= (resolved33 [[1 2] [3 4]] 2) '([1 2] [1 2] [3 4] [3 4]))
+    (= (resolved33 [44 33] 2) [44 44 33 33])
     ))

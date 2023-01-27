@@ -12,6 +12,9 @@
              [elementary.filters :as filters]
              [elementary.palindrome :as palindrome]
              [elementary.letters_caps :as letters]
+             [elementary.ranges :as rangeG]
+             [elementary.match :as matchF]
+             [elementary.regex :as regx]
              )
   (:gen-class))
 
@@ -50,5 +53,12 @@
   (println "Problem 29: " (letters/problem29))
   (println "Problem 30: " (sequences/problem30))
   (println "Problem 31: " (sequences/problem31))
+  (println "Problem 32: " (sequences/problem32))
+  (println "Problem 33: " (sequences/problem33))
+  (println "Problem 34: " (rangeG/problem34))
+  (println "Problem 35: " (matchF/problem35))
+  (println "Problem 36: " (matchF/problem36))
+  (println "Problem 37: " (regx/problem37))
+  (println "Problem 38: " (matchF/problem38))
   ;https://4clojure.oxal.org/#/problem/14
   )

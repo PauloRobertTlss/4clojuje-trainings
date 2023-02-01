@@ -15,6 +15,7 @@
              [elementary.ranges :as rangeG]
              [elementary.match :as matchF]
              [elementary.regex :as regx]
+             [elementary.combine :as combine]
              )
   (:gen-class))
 
@@ -60,5 +61,6 @@
   (println "Problem 36: " (matchF/problem36))
   (println "Problem 37: " (regx/problem37))
   (println "Problem 38: " (matchF/problem38))
+  (println "Problem 39: " (combine/problem39))
   ;https://4clojure.oxal.org/#/problem/14
   )

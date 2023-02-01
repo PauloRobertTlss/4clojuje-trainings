@@ -38,12 +38,36 @@
        reversed
        ))))
 
+
+(defn resolved23WithReduce
+  ([args]
+   (reduce (fn
+       [accum args]
+             ((drop-last args) (conj accum (last args)))
+       ) '() args)))
+
+
+(defn reduce-right [f coll]
+  (loop [[c & cs] coll rvsd '()]
+    (if (nil? cs)
+      (loop [acc c [r & rs] rvsd]
+        (if r (recur (f r acc) rs) acc))
+      (recur cs (cons c rvsd)))))
+
+;https://gist.github.com/kohyama/10232624
+(defn reverseManual
+  [args]
+  (reduce (fn
+            [acc item]
+            (cons item acc)
+            ) '() args))
+
 (defn problem23
   []
   (and
     (= (resolved23 [1 2 3 4 5]) [5 4 3 2 1])
     (= (resolved23 (sorted-set 5 7 2 7)) '(7 5 2))
-    (= (resolved23 [[1 2] [3 4] [5 6]]) [[5 6] [3 4] [1 2]])
+    (= (reverseManual [[1 2] [3 4] [5 6]]) [[5 6] [3 4] [1 2]])
     ))
 
 

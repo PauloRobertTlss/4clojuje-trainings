@@ -16,6 +16,7 @@
              [elementary.match :as matchF]
              [elementary.regex :as regx]
              [elementary.combine :as combine]
+             [elementary.factorial :as factorial]
              )
   (:gen-class))
 
@@ -62,5 +63,8 @@
   (println "Problem 37: " (regx/problem37))
   (println "Problem 38: " (matchF/problem38))
   (println "Problem 39: " (combine/problem39))
+  (println "Problem 40: " (combine/problem40))
+  (println "Problem 41: " (combine/problem41))
+  (println "Problem 42: " (factorial/problem42))
   ;https://4clojure.oxal.org/#/problem/14
   )
